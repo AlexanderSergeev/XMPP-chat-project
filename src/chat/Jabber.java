@@ -11,6 +11,7 @@ import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
@@ -20,7 +21,16 @@ public class Jabber implements MessageListener {
 	XMPPConnection connection;
 
 	public void login(String userName, String password) throws XMPPException {
-		ConnectionConfiguration config = new ConnectionConfiguration("jabbka.ru", 5222);
+		ConnectionConfiguration config = new ConnectionConfiguration("jabber.ru", 5222, "jabber.ru");
+		
+		config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled);
+		//May be useful in the future
+		//config.setCompressionEnabled(false);
+		//config.setSendPresence(false);
+		
+		//Very important for jabber.ru!!!
+		SASLAuthentication.supportSASLMechanism("PLAIN", 0);
+		
 		connection = new XMPPConnection(config);
 
 		connection.connect();
@@ -61,7 +71,7 @@ public class Jabber implements MessageListener {
 		XMPPConnection.DEBUG_ENABLED = false;
 
 		// Enter your login information here
-		c.login("DeMurat@jabbka.ru", "ManuelNeuer");
+		c.login("Alexander_Sergeev", "ManuelNeuer");
 
 		c.displayBuddyList();
 

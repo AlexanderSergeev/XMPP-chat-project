@@ -6,7 +6,7 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 
 public class Main {
-
+	
 	public static void main(String[] args) throws XMPPException {
 		// Create the configuration for this new connection
 		ConnectionConfiguration config = new ConnectionConfiguration("jabber.ru");
@@ -21,5 +21,6 @@ public class Main {
 		// Disconnect from the server
 		connection.disconnect();
 	}
+	
 
 }

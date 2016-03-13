@@ -16,11 +16,11 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
-public class Jabber implements MessageListener {
+class Jabber implements MessageListener {
 
 	XMPPConnection connection;
 
-	public void login(String userName, String password) throws XMPPException {
+	private void login(String userName, String password) throws XMPPException {
 		ConnectionConfiguration config = new ConnectionConfiguration("jabber.ru", 5222, "jabber.ru");
 		
 		config.setSecurityMode(ConnectionConfiguration.SecurityMode.disabled);
@@ -37,12 +37,12 @@ public class Jabber implements MessageListener {
 		connection.login(userName, password);
 	}
 
-	public void sendMessage(String message, String to) throws XMPPException {
+	private void sendMessage(String message, String to) throws XMPPException {
 		Chat chat = connection.getChatManager().createChat(to, this);
 		chat.sendMessage(message);
 	}
 
-	public void displayBuddyList() {
+	private void displayBuddyList() {
 		Roster roster = connection.getRoster();
 		Collection<RosterEntry> entries = roster.getEntries();
 
@@ -52,7 +52,7 @@ public class Jabber implements MessageListener {
 		}
 	}
 
-	public void disconnect() {
+	private void disconnect() {
 		connection.disconnect();
 	}
 

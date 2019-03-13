@@ -1,2 +1,2 @@
 # XMPP-chat-project
-A university project - simple program using Smack API
+Simple program using Smack API
